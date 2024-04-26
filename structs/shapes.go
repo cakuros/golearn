@@ -1,8 +1,26 @@
 package shapes
 
+type Shape interface {
+	Area() float64
+}
+
 type Rectangle struct {
 	Width float64
 	Height float64
+}
+
+func (r Rectangle) Area() float64 {
+	return r.Width * r.Height
+}
+
+const PI = 3.141592653589793
+
+type Circle struct {
+	Radius float64
+}
+
+func (c Circle) Area() float64 {
+	return c.Radius * c.Radius * PI
 }
 
 func Perimeter(rectangle Rectangle) float64 {
