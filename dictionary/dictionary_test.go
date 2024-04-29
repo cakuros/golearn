@@ -54,6 +54,30 @@ func TestUpdate(t *testing.T) {
 
 		assertDefinition(t, dictionary, word, newDefinition)
 	})
+
+	t.Run("word doesn't exist", func(t *testing.T){
+		word := "test"
+		definition := "this is just a test"
+		dictionary := Dictionary{}
+
+		err := dictionary.Update(word, definition)
+
+		assertError(t, err, ErrWordDoesNotExist)
+	})
+}
+
+func TestDelete(t *testing.T) {
+	t.Run("word exists", func(t *testing.T){
+		word := "test"
+		dictionary := Dictionary{word: "test definition"}
+
+		dictionary.Delete(word)
+
+		_, err := dictionary.Search(word)
+		if err != ErrNotFound {
+			t.Errorf("expected %q to not exist", word)
+		}
+	})
 }
 
 func assertDefinition(t testing.TB, dictionary Dictionary, key string, value string) {
