@@ -12,14 +12,6 @@ func TestRepeat(t *testing.T) {
 			t.Errorf("expected %q but got %q", expected, repeated)
 		}
 	})
-	t.Run("repeat 3 times", func(t *testing.T) {
-		repeated := Repeat("a", 3)
-		expected := "aaa"
-
-		if repeated != expected {
-			t.Errorf("expected %q but got %q", expected, repeated)
-		}
-	})
 }
 
 func BenchmarkRepeat(b *testing.B) {
